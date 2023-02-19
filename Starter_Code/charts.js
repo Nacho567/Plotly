@@ -82,27 +82,47 @@ function buildCharts(sample) {
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [
+      x: sampleValues,
+      y: ,
+      type: "bar",
+      orientation: horizontal,
+      hovertext: otu_labels
 
     ];
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
+      title: "Top 10 Bacteria Cultures Found",
+      
 
     };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
-
+    Plotly.newPlot("plotArea", barData, barLayout);
+    
     // Deliverable 2: 1. Create the trace for the bubble chart.
+    var bubbleData = [
+
+    ];
 
     // Deliverable 2: 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+
+    };
 
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
-    
+    Plotly.newPlot("plotArea", bubbleData, bubbleLayout);
     // Deliverable 3: 4. Create the trace for the gauge chart.
-    
+    var gaugeData = [
+
+    ];
+
     // Deliverable 3: 5. Create the layout for the gauge chart.
+    var gaugeLayout = {
+
+    };
 
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
-
+    Plotly.newPlot("plotArea", gaugeData, gaugeLayout);
   });
 }
