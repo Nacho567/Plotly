@@ -80,45 +80,68 @@ function buildCharts(sample) {
     // so the otu_ids with the most bacteria are last. 
     var yticks = 
 
-    // Deliverable 1: 8. Create the trace for the bar chart. 
-    var barData = [
+    // Deliverable 1: 8. Create the trace for the bar chart. ***Might need to add {} to the traces
+    var barData = [{
       x: sampleValues,
       y: ,
       type: "bar",
-      orientation: horizontal,
-      hovertext: otu_labels
+      orientation: 'h',
+      text: [otu_labels]
 
-    ];
+  }];
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
       title: "Top 10 Bacteria Cultures Found",
-      
-
+      bargap: 0.05
+    
     };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("plotArea", barData, barLayout);
     
     // Deliverable 2: 1. Create the trace for the bubble chart.
-    var bubbleData = [
+    var bubbleData = [{
+      x: otu_ids,
+      y: sample_values,
+      mode: 'markers',
+      marker: {
+        size: sample_values,
+        color: otu_ids
+      },
+      text: [otu_labels]
 
-    ];
+    }];
 
     // Deliverable 2: 2. Create the layout for the bubble chart.
     var bubbleLayout = {
+      title: "Bacteria Cultures Per Sample",
+      showlegend: false,
+      xaxis: "OTU ID",
+      height: 600,
+      width: 600,
+      hovermode: closest
 
     };
 
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot("plotArea", bubbleData, bubbleLayout);
-    // Deliverable 3: 4. Create the trace for the gauge chart.
-    var gaugeData = [
 
-    ];
+    // Deliverable 3: 4. Create the trace for the gauge chart.
+    var gaugeData = [{
+      domain:
+      value:
+      title: { text: "Scrubs per Week"},
+      type: "indicator",
+      mode: "gauge+number"
+
+    }];
 
     // Deliverable 3: 5. Create the layout for the gauge chart.
     var gaugeLayout = {
+      width: 600,
+      height: 500,
+      margin: { t: 0, b: 0,}
 
     };
 
