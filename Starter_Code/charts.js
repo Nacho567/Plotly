@@ -4,6 +4,7 @@ function init() {
 
   // Use the list of sample names to populate the select options
   d3.json("samples.json").then((data) => {
+    console.log(data);
     var sampleNames = data.names;
 
     sampleNames.forEach((sample) => {
@@ -46,7 +47,7 @@ function buildMetadata(sample) {
 
     // Use `Object.entries` to add each key and value pair to the panel
     // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
+    // tags for each key-value in the metadata. h6 or h5??
     Object.entries(result).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
     });
@@ -61,7 +62,7 @@ function buildCharts(sample) {
     console.log(data);
 
     // Deliverable 1: 3. Create a variable that holds the samples array. 
-    let 
+    let samples = 
     
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
 
