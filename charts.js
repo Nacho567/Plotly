@@ -58,38 +58,39 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
   // Deliverable 1: 2. Use d3.json to load the samples.json file 
   d3.json("samples.json").then((data) => {
-    console.log(data);
+    //console.log(data);
 
     // Deliverable 1: 3. Create a variable that holds the samples array. 
-    let samples = data.samples;
+    var samples = data.samples;
     
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
-    let filSample = samples.filter(entry => entry.id == sample)[0];
-
+    let resultArray2 = samples.filter(sampleObj => sampleObj.id == sample);
+  
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
-    let metadata = data.metadata.filter(entry => entry.id == sample)[0];
-    // Deliverable 1: 5. Create a variable that holds the first sample in the array. Already done?
+    let metadata2 = data.metadata.filter(entry => entry.id == sample)[0];
 
+    // Deliverable 1: 5. Create a variable that holds the first sample in the array. Already done?
+    let result = resultArray2[0];
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array. Already done?
 
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = filSample.otu_ids;
+    var otu_ids = result.otu_ids;
 
-    var otu_labels = filSample.otu_labels;
+    var otu_labels = result.otu_labels;
 
-    var sample_values = filSample.sample_values;
+    var sample_values = result.sample_values;
 
     // Deliverable 3: 3. Create a variable that holds the washing frequency. parseFloat?
-    var wfreq = parseFloat(metadata.wfreq);
+    var wfreq = parseFloat(metadata2.wfreq);
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
-    var yticks = otu_ids.map(OTU => OTU.id).slice(0, 10).reverse();
+    var yticks = otu_ids.slice(0, 10).map(otuID => 'OTU ${otuID}').reverse();
 
     // Deliverable 1: 8. Create the trace for the bar chart. ***Might need to add {} to the traces
     var barData = [{
-      x: sampleValues,
+      x: sample_values,
       y: yticks,
       type: "bar",
       orientation: 'h',
