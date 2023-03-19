@@ -64,29 +64,31 @@ function buildCharts(sample) {
     var samples = data.samples;
     
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
-    let resultArray2 = samples.filter(sampleObj => sampleObj.id == sample);
+    var sampleArray = samples.filter(sampleObj => sampleObj.id == sample);
   
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
-    let metadata2 = data.metadata.filter(entry => entry.id == sample)[0];
+    var metadataArray = metadata.filter(sampleObj => sampleObj.id == sample);
 
     // Deliverable 1: 5. Create a variable that holds the first sample in the array. Already done?
-    let result = resultArray2[0];
+    var firstSample = sampleArray[0];
+
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array. Already done?
+    var result = metadataArray[0];
 
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = result.otu_ids;
+    var otu_ids = firstSample.otu_ids;
 
-    var otu_labels = result.otu_labels;
+    var otu_labels = firstSample.otu_labels;
 
-    var sample_values = result.sample_values;
+    var sample_values = firstSample.sample_values;
 
     // Deliverable 3: 3. Create a variable that holds the washing frequency. parseFloat?
-    var wfreq = parseFloat(metadata2.wfreq);
+    var wfreq = parseFloat(result.wfreq);
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
-    var yticks = otu_ids.slice(0, 10).map(otuID => 'OTU ${otuID}').reverse();
+    var yticks = otu_ids.map(sampleObj => 'OTU ' + sampleObj).slice(0, 10).reverse();
 
     // Deliverable 1: 8. Create the trace for the bar chart. ***Might need to add {} to the traces
     var barData = [{
@@ -118,7 +120,7 @@ function buildCharts(sample) {
         color: otu_ids,
         colorscale: 'tropic'
       },
-      text: [otu_labels]
+      text: otu_labels
 
     }];
 
