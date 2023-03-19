@@ -3,7 +3,7 @@ function init() {
   var selector = d3.select("#selDataset");
 
   // Use the list of sample names to populate the select options
-  d3.json("samples.json").then((data) => {
+  d3.json("data/samples.json").then((data) => {
     var sampleNames = data.names;
 
     sampleNames.forEach((sample) => {
@@ -67,12 +67,13 @@ function buildCharts(sample) {
     var sampleArray = samples.filter(sampleObj => sampleObj.id == sample);
   
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    var metadata = data.metadata;
     var metadataArray = metadata.filter(sampleObj => sampleObj.id == sample);
 
-    // Deliverable 1: 5. Create a variable that holds the first sample in the array. Already done?
+    // Deliverable 1: 5. Create a variable that holds the first sample in the array.
     var firstSample = sampleArray[0];
 
-    // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array. Already done?
+    // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
     var result = metadataArray[0];
 
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
@@ -103,7 +104,7 @@ function buildCharts(sample) {
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
       title: "Top 10 Bacteria Cultures Found",
-      bargap: 0.05
+      bargap: 0.05,
     
     };
 
@@ -118,7 +119,7 @@ function buildCharts(sample) {
       marker: {
         size: sample_values,
         color: otu_ids,
-        colorscale: 'tropic'
+        colorscale: 'rainbow'
       },
       text: otu_labels
 
@@ -128,9 +129,9 @@ function buildCharts(sample) {
     var bubbleLayout = {
       title: "Bacteria Cultures Per Sample",
       showlegend: false,
-      xaxis: "OTU ID",
-      height: 600,
-      width: 600,
+      xaxis: {title: "OTU ID"},
+      yaxis: {title: "Count"},
+      automargin: true,
       hovermode: 'closest'
 
     };
